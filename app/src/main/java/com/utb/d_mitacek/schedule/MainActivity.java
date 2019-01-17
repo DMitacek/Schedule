@@ -16,9 +16,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<ScheduleItem> scheduleItems = new ArrayList<>();
-        scheduleItems.add(new ScheduleItem(R.drawable.ic_icons8_sun,"hoho", "haha"));
-        scheduleItems.add(new ScheduleItem(R.drawable.ic_icons8_sun,"hehe", "hihi"));
-        scheduleItems.add(new ScheduleItem(R.drawable.ic_icons8_sun,"huhu", "huehue"));
+        ArrayList<ScheduleItem> scheduleList = new ArrayList<>();
+        scheduleList.add(new ScheduleItem(R.drawable.ic_icons8_sun,"hoho", "haha"));
+        scheduleList.add(new ScheduleItem(R.drawable.ic_icons8_sun,"hehe", "hihi"));
+        scheduleList.add(new ScheduleItem(R.drawable.ic_icons8_sun,"huhu", "huehue"));
+
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new ScheduleAdapter(scheduleList);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
     }
 }
