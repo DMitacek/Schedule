@@ -5,68 +5,23 @@
     android:layout_width="300dp"
     android:layout_height="400dp">
 
-    <TextView
-        android:id="@+id/nazev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Název :"
-        android:textSize="30sp" />
-    <TextView
-        android:id="@+id/mesto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/nazev"
-        android:gravity="center"
-        android:text="Město :"
-        android:textSize="30sp" />
+   <include
+       android:id="@+id/layoutOrig"
+       layout="@layout/schedule_orig_action"
+       android:layout_width="260dp"
+       android:layout_height="wrap_content"
 
+       />
     <Button
         android:id="@+id/klikni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mesto"
+        android:layout_below="@+id/layoutOrig"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
         android:text="Add" />
 
-    <EditText
-        android:id="@+id/editTextNazev"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:layout_toEndOf="@+id/nazev"
-        android:inputType="textPersonName"
-        tools:text="Name" />
-
-    <EditText
-        android:id="@+id/editTextMesto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:layout_below="@+id/editTextNazev"
-        android:layout_toEndOf="@+id/mesto"
-        android:inputType="textPersonName"
-        tools:text="City" />
 
 
 </RelativeLayout>

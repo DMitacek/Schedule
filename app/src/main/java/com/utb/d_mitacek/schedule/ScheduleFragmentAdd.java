@@ -18,12 +18,10 @@ import android.widget.Toast;
 public class ScheduleFragmentAdd extends DialogFragment {
     private EditText mesto;
     private EditText nazev;
-    interface IDialogEditData {
-        void onDialogEditBtnClick(int fotka, String text1, String text2);
-        void onDialogDeleteBtnClick(String text1);
+    interface IDialogAddData {
         void onDialogAddBtnClick(int fotka, String text1, String text2);
     }
-    private IDialogEditData mCallback = null;
+    private IDialogAddData mCallback = null;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,10 +42,13 @@ public class ScheduleFragmentAdd extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            mCallback = (IDialogEditData)getActivity();
+            mCallback = (IDialogAddData)getActivity();
 
         } catch (ClassCastException e) {
             Log.d("MyDialog", "Activity doesn't implement the IDialogAddData interface");
         }
     }
+
+
+
 }
