@@ -102,10 +102,10 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
     }
 
     @Override
-    public void onDialogDeleteBtnClick(String text1) {
+    public void onDialogDeleteBtnClick(int ID) {
         for(int i = 0; i <= scheduleList.size()-1; i++)
         {
-            if(scheduleList.get(i).getText1().equals(text1))
+            if(scheduleList.get(i).getID() == ID)
             {
                 scheduleList.remove(i);
             }

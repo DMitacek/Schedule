@@ -19,7 +19,7 @@ public class ScheduleFragmentEdit extends DialogFragment {
     private EditText nazev;
     interface IDialogEditData {
         void onDialogEditBtnClick(int ID, String text1, String text2);
-        void onDialogDeleteBtnClick(String text1);
+        void onDialogDeleteBtnClick(int ID);
     }
     private ScheduleFragmentEdit.IDialogEditData mCallback = null;
     @Nullable
@@ -41,6 +41,14 @@ public class ScheduleFragmentEdit extends DialogFragment {
             @Override
             public void onClick(View v) {
                 mCallback.onDialogEditBtnClick(item.getID(), nazev.getText().toString(), mesto.getText().toString());
+                dismiss();
+            }
+        });
+
+        rootView.findViewById(R.id.deleteButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCallback.onDialogDeleteBtnClick(item.getID());
                 dismiss();
             }
         });
