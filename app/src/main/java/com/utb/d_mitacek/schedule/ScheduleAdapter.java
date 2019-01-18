@@ -50,4 +50,5 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     public int getItemCount() {
         return mScheduleList.size();
     }
+
 }

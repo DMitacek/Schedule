@@ -5,6 +5,10 @@ public class ScheduleItem {
     private String mText1;
     private String mText2;
 
+
+    public ScheduleItem() {
+
+    }
     public ScheduleItem(int imageResource, String text1, String text2) {
         mImageResource = imageResource;
         mText1 = text1;
