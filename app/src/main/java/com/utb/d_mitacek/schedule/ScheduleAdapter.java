@@ -1,13 +1,13 @@
 package com.utb.d_mitacek.schedule;
 
-        import android.support.annotation.NonNull;
         import android.support.v7.widget.RecyclerView;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.ImageView;
         import android.widget.TextView;
-        import android.widget.Toast;
+
+        import org.w3c.dom.Text;
 
         import java.util.ArrayList;
 
@@ -28,15 +28,19 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
     public static class ScheduleViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
-        public TextView mTextView1;
-        public TextView mTextView2;
+        public TextView name;
+        public TextView city;
+        public TextView date;
+        public TextView time;
 
 
         public ScheduleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.imageView);
-            mTextView1 = itemView.findViewById(R.id.textView);
-            mTextView2 = itemView.findViewById(R.id.textView2);
+            name = itemView.findViewById(R.id.textView);
+            city = itemView.findViewById(R.id.textView2);
+            date = itemView.findViewById(R.id.textView3);
+            time = itemView.findViewById(R.id.textView4);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +77,10 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         ScheduleItem currentItem = mExampleList.get(position);
 
         holder.mImageView.setImageResource(currentItem.getImageResource());
-        holder.mTextView1.setText(currentItem.getText1());
-        holder.mTextView2.setText(currentItem.getText2());
+        holder.name.setText(currentItem.getName());
+        holder.city.setText(currentItem.getCity());
+        holder.date.setText(currentItem.getDate());
+        holder.time.setText(currentItem.getTime());
     }
 
     @Override
