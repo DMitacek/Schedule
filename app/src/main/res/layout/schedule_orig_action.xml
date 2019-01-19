@@ -7,26 +7,51 @@
 
     <TextView
         android:id="@+id/nazev"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Název :"
         android:textSize="30sp" />
+
     <TextView
         android:id="@+id/mesto"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/nazev"
         android:gravity="center"
         android:text="Město :"
         android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mesto"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+
+        android:text="Datum :"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/Time"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Čas :"
+        android:textSize="30sp" />
+
 
 
     <EditText
@@ -37,7 +62,7 @@
 
         android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_toEndOf="@+id/nazev"
         android:inputType="textPersonName"
@@ -47,15 +72,43 @@
         android:id="@+id/editTextMesto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_below="@+id/editTextNazev"
         android:layout_toEndOf="@+id/mesto"
-        android:inputType="textPersonName"
+        android:inputType="text"
         tools:text="City" />
+
+    <EditText
+        android:id="@+id/editTextDatum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextMesto"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@+id/mesto"
+        android:inputType="date"
+        tools:text="1.1.2019" />
+
+    <EditText
+        android:id="@+id/editTextCas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextDatum"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@+id/mesto"
+        android:inputType="time"
+        tools:text="12:00" />
+
+
+
 
 
 </RelativeLayout>

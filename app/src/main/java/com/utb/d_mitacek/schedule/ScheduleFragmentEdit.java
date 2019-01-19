@@ -14,11 +14,16 @@ import android.widget.ImageView;
 
 import com.google.gson.Gson;
 
+import java.util.Calendar;
+
 public class ScheduleFragmentEdit extends DialogFragment {
     private EditText mesto;
     private EditText nazev;
+    private EditText date;
+    private EditText time;
+
     interface IDialogEditData {
-        void onDialogEditBtnClick(int ID, String text1, String text2);
+        void onDialogEditBtnClick(int ID, String name, String city, String date, String time);
         void onDialogDeleteBtnClick(int ID);
     }
     private ScheduleFragmentEdit.IDialogEditData mCallback = null;
@@ -30,17 +35,23 @@ public class ScheduleFragmentEdit extends DialogFragment {
         final View rootView = inflater.inflate(R.layout.schedule_edit_action, container,false);
         nazev = rootView.findViewById(R.id.editTextNazev);
         mesto = rootView.findViewById(R.id.editTextMesto);
+        date = rootView.findViewById(R.id.editTextDatum);
+        time = rootView.findViewById(R.id.editTextCas);
         Bundle bundle = this.getArguments();
         assert bundle != null;
         String bundleString = (String) bundle.get("item");
         final ScheduleItem item = new Gson().fromJson(bundleString,ScheduleItem.class);
-        nazev.setText(item.getText1());
-        mesto.setText(item.getText2());
+        nazev.setText(item.getName());
+        mesto.setText(item.getCity());
+        date.setText(item.getDate());
+        time.setText(item.getTime());
+
+
 
         rootView.findViewById(R.id.editButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallback.onDialogEditBtnClick(item.getID(), nazev.getText().toString(), mesto.getText().toString());
+                mCallback.onDialogEditBtnClick(item.getID(), nazev.getText().toString(), mesto.getText().toString(),date.getText().toString(),time.getText().toString());
                 dismiss();
             }
         });

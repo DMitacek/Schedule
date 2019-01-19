@@ -1,22 +1,17 @@
 package com.utb.d_mitacek.schedule;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity implements ScheduleFragmentAdd.IDialogAddData, ScheduleFragmentEdit.IDialogEditData, ScheduleAdapter.OnItemClickListener {
@@ -66,13 +61,13 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
 
 
     @Override
-    public void onDialogAddBtnClick(int fotka, String text1, String text2) {
+    public void onDialogAddBtnClick(int fotka, String name, String city, String date, String time) {
         if(scheduleList.size()!= 0)
         {
-            scheduleList.add(new ScheduleItem(scheduleList.get(scheduleList.size()-1).getID() + 1, R.drawable.ic_icons8_sun,text1, text2));
+            scheduleList.add(new ScheduleItem(scheduleList.get(scheduleList.size()-1).getID() + 1, R.drawable.ic_icons8_sun,name, city, date, time));
         }else
         {
-            scheduleList.add(new ScheduleItem(1, R.drawable.ic_icons8_sun,text1, text2));
+            scheduleList.add(new ScheduleItem(1, R.drawable.ic_icons8_sun,name, city, date, time));
         }
 
     }
@@ -89,13 +84,15 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
     }
 
     @Override
-    public void onDialogEditBtnClick(int ID, String text1, String text2) {
+    public void onDialogEditBtnClick(int ID, String name, String city, String date, String time) {
         for(int i = 0; i <= scheduleList.size()-1; i++)
         {
             if(scheduleList.get(i).getID() == ID)
             {
-                scheduleList.get(i).setmText1(text1);
-                scheduleList.get(i).setmText2(text2);
+                scheduleList.get(i).setName(name);
+                scheduleList.get(i).setCity(city);
+                scheduleList.get(i).setDate(date);
+                scheduleList.get(i).setTime(time);
             }
         }
         mAdapter.notifyDataSetChanged();
