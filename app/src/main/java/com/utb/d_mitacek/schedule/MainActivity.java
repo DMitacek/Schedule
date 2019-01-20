@@ -1,5 +1,6 @@
 package com.utb.d_mitacek.schedule;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -7,9 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -61,13 +77,13 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
 
 
     @Override
-    public void onDialogAddBtnClick(int fotka, String name, String city, String date, String time) {
+    public void onDialogAddBtnClick(String fotka, String name, String city, String date, String time) {
         if(scheduleList.size()!= 0)
         {
-            scheduleList.add(new ScheduleItem(scheduleList.get(scheduleList.size()-1).getID() + 1, R.drawable.ic_icons8_sun,name, city, date, time));
+            scheduleList.add(new ScheduleItem(scheduleList.get(scheduleList.size()-1).getID() + 1, "http://openweathermap.org/img/w/01d.png",name, city, date, time));
         }else
         {
-            scheduleList.add(new ScheduleItem(1, R.drawable.ic_icons8_sun,name, city, date, time));
+            scheduleList.add(new ScheduleItem(1,"http://openweathermap.org/img/w/01d.png",name, city, date, time));
         }
 
     }
@@ -109,4 +125,5 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
         }
         mAdapter.notifyDataSetChanged();
     }
+
 }

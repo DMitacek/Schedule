@@ -6,21 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.text.InputType;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.sql.Time;
-import java.text.SimpleDateFormat;
+
+
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+
 
 
 public class ScheduleFragmentAdd extends DialogFragment {
@@ -31,7 +27,7 @@ public class ScheduleFragmentAdd extends DialogFragment {
     private String datum1;
 
     interface IDialogAddData {
-        void onDialogAddBtnClick(int fotka, String name, String city,String date, String time);
+        void onDialogAddBtnClick(String fotka, String name, String city,String date, String time);
     }
     private IDialogAddData mCallback = null;
     @Nullable
@@ -66,7 +62,7 @@ public class ScheduleFragmentAdd extends DialogFragment {
                 calendar.set(Calendar.HOUR_OF_DAY,Integer.parseInt(cas1[0]));
                 calendar.set(Calendar.MINUTE,Integer.parseInt(cas1[1]));*/
 
-                mCallback.onDialogAddBtnClick(R.drawable.ic_icons8_sun, nazev.getText().toString(), mesto.getText().toString(), datum.getText().toString(), cas.getText().toString());
+                mCallback.onDialogAddBtnClick("http://openweathermap.org/img/w/01d.png", nazev.getText().toString(), mesto.getText().toString(), datum.getText().toString(), cas.getText().toString());
                 dismiss();
             }
         });

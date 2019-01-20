@@ -1,5 +1,7 @@
 package com.utb.d_mitacek.schedule;
 
+        import android.graphics.BitmapFactory;
+        import android.graphics.drawable.Drawable;
         import android.support.v7.widget.RecyclerView;
         import android.view.LayoutInflater;
         import android.view.View;
@@ -7,10 +9,15 @@ package com.utb.d_mitacek.schedule;
         import android.widget.ImageView;
         import android.widget.TextView;
 
-        import org.w3c.dom.Text;
-
+        import java.io.InputStream;
+        import java.net.HttpURLConnection;
+        import java.net.MalformedURLException;
+        import java.net.URL;
         import java.util.ArrayList;
 
+        import com.bumptech.glide.Glide;
+        import com.bumptech.glide.annotation.GlideModule;
+        import com.bumptech.glide.module.AppGlideModule;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder> {
     private ArrayList<ScheduleItem> mExampleList;
@@ -75,8 +82,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     @Override
     public void onBindViewHolder(ScheduleViewHolder holder, int position) {
         ScheduleItem currentItem = mExampleList.get(position);
+        Glide.with(holder.mImageView).load(currentItem.getImageResource()).into(holder.mImageView);
 
-        holder.mImageView.setImageResource(currentItem.getImageResource());
         holder.name.setText(currentItem.getName());
         holder.city.setText(currentItem.getCity());
         holder.date.setText(currentItem.getDate());
@@ -92,5 +99,38 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     {
         return mExampleList.get(position);
     }
+
+    public static Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    public boolean loadImageFromURL(String fileUrl,ImageView iv){
+        try {
+
+            URL myFileUrl = new URL (fileUrl);
+            HttpURLConnection conn =
+                    (HttpURLConnection) myFileUrl.openConnection();
+            conn.setDoInput(true);
+            conn.connect();
+
+            InputStream is = conn.getInputStream();
+            iv.setImageBitmap(BitmapFactory.decodeStream(is));
+
+            return true;
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 
 }
