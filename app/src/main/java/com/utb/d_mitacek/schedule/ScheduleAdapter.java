@@ -40,6 +40,10 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         public TextView date;
         public TextView time;
 
+        public TextView teplotaAktualni;
+        public TextView teplotaMinimalni;
+        public TextView teplotaMaximalni;
+
 
         public ScheduleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -48,6 +52,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             city = itemView.findViewById(R.id.textView2);
             date = itemView.findViewById(R.id.textView3);
             time = itemView.findViewById(R.id.textView4);
+            teplotaAktualni = itemView.findViewById(R.id.textView5TeplotaAktualniHodnota);
+            teplotaMinimalni = itemView.findViewById(R.id.textView5TeplotaMinHodnota);
+            teplotaMaximalni = itemView.findViewById(R.id.textView5TeplotaMaxHodnota);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +95,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         holder.city.setText(currentItem.getCity());
         holder.date.setText(currentItem.getDate());
         holder.time.setText(currentItem.getTime());
+        holder.teplotaAktualni.setText(currentItem.getTeplota()[0]);
+        holder.teplotaMinimalni.setText(currentItem.getTeplota()[1]);
+        holder.teplotaMaximalni.setText(currentItem.getTeplota()[2]);
     }
 
     @Override

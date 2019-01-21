@@ -154,10 +154,11 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
                         String[] cdate = weather.getString("dt_txt").split(" ");
                         if(date1.equals(cdate[0])){
                             String[] apitime = cdate[1].split(":");
-                            int cas = Integer.parseInt(apitime[0])+3 - Integer.parseInt(time[0]);
+                            int cas = Integer.parseInt(apitime[0])+2 - Integer.parseInt(time[0]);
                             if (cas <= 3 && cas >= 0) {
-                                JSONArray array1= weather.getJSONArray("main");
-
+                                JSONObject array1= weather.getJSONObject("main");
+                                String[] temp = { array1.getString("temp"), array1.getString("temp_min"), array1.getString("temp_max")};
+                                item.setTeplota(temp);
                                 JSONArray array= weather.getJSONArray("weather");
                                 String icon = array.getJSONObject(0).getString("icon");
                                 item.setmImageResource("http://openweathermap.org/img/w/"+icon+".png");

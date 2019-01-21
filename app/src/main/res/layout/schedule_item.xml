@@ -17,7 +17,6 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:padding="2dp" />
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -51,16 +50,78 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_below="@+id/textView3"
-            android:layout_toEndOf="@+id/imageView"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:layout_below="@+id/textView3"
             android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/imageView"
             android:text="Line 2"
             android:textSize="15sp" />
 
+        <TextView
+            android:id="@+id/textView5TeplotaAktualniHodnota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
+
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="Line 2"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView5TeplotaAktualni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_toStartOf="@+id/textView5TeplotaAktualniHodnota"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop = "5sp"
+            android:text="Teplota aktuální : "
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textView5TeplotaMinHodnota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5TeplotaAktualniHodnota"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp"
+            android:text="Line 2"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/textView5TeplotaMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5TeplotaAktualni"
+            android:layout_toStartOf="@+id/textView5TeplotaMinHodnota"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5sp"
+            android:text="Teplota min : "
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textView5TeplotaMaxHodnota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5TeplotaMinHodnota"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp"
+            android:text="Line 2"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/textView5TeplotaMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5TeplotaMin"
+            android:layout_toStartOf="@+id/textView5TeplotaMaxHodnota"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5sp"
+            android:text="Teplota max : "
+            android:textSize="15sp" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
