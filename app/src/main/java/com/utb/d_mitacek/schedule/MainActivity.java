@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         actionButton = findViewById(R.id.floatingActionButton);
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
 
     @Override
     public void onDialogEditBtnClick(int ID, String name, String city, String date, String time) {
+
         for(int i = 0; i <= scheduleList.size()-1; i++)
         {
             if(scheduleList.get(i).getID() == ID)
@@ -116,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
                 scheduleList.get(i).setCity(city);
                 scheduleList.get(i).setDate(date);
                 scheduleList.get(i).setTime(time);
+                edit_weather(i);
             }
         }
         mAdapter.notifyDataSetChanged();
@@ -154,8 +157,8 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
                         String[] cdate = weather.getString("dt_txt").split(" ");
                         if(date1.equals(cdate[0])){
                             String[] apitime = cdate[1].split(":");
-                            int cas = Integer.parseInt(apitime[0])+2 - Integer.parseInt(time[0]);
-                            if (cas <= 3 && cas >= 0) {
+                            int cas = Integer.parseInt(apitime[0]) - Integer.parseInt(time[0]);
+                            if (cas < 3 && cas >= 0) {
                                 JSONObject array1= weather.getJSONObject("main");
                                 String[] temp = { array1.getString("temp"), array1.getString("temp_min"), array1.getString("temp_max")};
                                 item.setTeplota(temp);
@@ -163,6 +166,58 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
                                 String icon = array.getJSONObject(0).getString("icon");
                                 item.setmImageResource("http://openweathermap.org/img/w/"+icon+".png");
                                 scheduleList.add(item);
+                                mAdapter.notifyDataSetChanged();
+                                break;
+                            }
+                        }
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }
+        );
+        RequestQueue queue1 = Volley.newRequestQueue(this);
+        queue1.add(jor);
+    }
+
+    public void edit_weather(final int e){
+
+        String url = "https://api.openweathermap.org/data/2.5/forecast?q="+ scheduleList.get(e).getCity() +",CZ&appid=fe47a7288fc4af31e584cfd1eb0f6fe5&units=metric";
+        String url1;
+
+        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray list = response.getJSONArray("list");
+                    //Calendar cal = Calendar.getInstance();
+                    String[] date = scheduleList.get(e).getDate().split("\\.");
+                    String date1 = date[2]+"-"+date[1]+"-"+date[0];
+                    String[] time = scheduleList.get(e).getTime().split(":");
+                    int i;
+
+                    for(i=0; i<list.length(); i++){
+                        JSONObject weather = list.getJSONObject(i);
+                        String[] cdate = weather.getString("dt_txt").split(" ");
+                        if(date1.equals(cdate[0])){
+                            String[] apitime = cdate[1].split(":");
+                            int cas = Integer.parseInt(apitime[0]) - Integer.parseInt(time[0]);
+                            if (cas < 3 && cas >= 0) {
+                                JSONObject array1= weather.getJSONObject("main");
+                                String[] temp = { array1.getString("temp"), array1.getString("temp_min"), array1.getString("temp_max")};
+                                scheduleList.get(e).setTeplota(temp);
+                                JSONArray array= weather.getJSONArray("weather");
+                                String icon = array.getJSONObject(0).getString("icon");
+                                scheduleList.get(e).setmImageResource("http://openweathermap.org/img/w/"+icon+".png");
                                 mAdapter.notifyDataSetChanged();
                                 break;
                             }
