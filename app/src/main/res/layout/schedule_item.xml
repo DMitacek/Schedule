@@ -80,7 +80,7 @@
             android:layout_marginEnd="10dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop = "5sp"
-            android:text="Teplota aktuální : "
+            android:text="Teplota : "
             android:textSize="15sp" />
 
         <TextView
@@ -100,7 +100,7 @@
             android:layout_toStartOf="@+id/textView5TeplotaMinHodnota"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="5sp"
-            android:text="Teplota min : "
+            android:text="Tmin : "
             android:textSize="15sp" />
 
         <TextView
@@ -120,7 +120,7 @@
             android:layout_toStartOf="@+id/textView5TeplotaMaxHodnota"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="5sp"
-            android:text="Teplota max : "
+            android:text="Tmax : "
             android:textSize="15sp" />
     </RelativeLayout>
 

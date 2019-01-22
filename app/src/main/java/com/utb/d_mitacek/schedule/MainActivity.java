@@ -1,8 +1,10 @@
 package com.utb.d_mitacek.schedule;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +34,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity implements ScheduleFragmentAdd.IDialogAddData, ScheduleFragmentEdit.IDialogEditData, ScheduleAdapter.OnItemClickListener {
@@ -40,10 +46,21 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
     private FloatingActionButton actionButton;
     private ArrayList<ScheduleItem> scheduleList = new ArrayList<>();
     private ScheduleItem item;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences shared = getSharedPreferences("App_settings", MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        String response=shared.getString("ScheduleList" , "");
+        ArrayList<ScheduleItem> scheduleList1 = gson.fromJson(response,
+                new TypeToken<ArrayList<ScheduleItem>>(){}.getType());
+        if(scheduleList!=null){
+            scheduleList = scheduleList1;
+        }
 
         actionButton = findViewById(R.id.floatingActionButton);
         mRecyclerView = findViewById(R.id.recyclerView);
@@ -79,7 +96,20 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
         });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences shared = getSharedPreferences("App_settings", MODE_PRIVATE);;
+        SharedPreferences.Editor editor;
 
+        Gson gson = new Gson();
+        String json = gson.toJson(scheduleList);
+
+        editor = shared.edit();
+        editor.remove("ScheduleList").commit();
+        editor.putString("ScheduleList", json);
+        editor.commit();
+    }
 
     @Override
     public void onDialogAddBtnClick(String fotka, String name, String city, String date, String time) {
@@ -92,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
             item = new ScheduleItem(1,fotka,name, city, date, time);
         }
         find_weather();
-
+        mAdapter.notifyDataSetChanged();
 
     }
 
@@ -157,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
                         String[] cdate = weather.getString("dt_txt").split(" ");
                         if(date1.equals(cdate[0])){
                             String[] apitime = cdate[1].split(":");
-                            int cas = Integer.parseInt(apitime[0]) - Integer.parseInt(time[0]);
+                            int cas = Integer.parseInt(time[0]) - Integer.parseInt(apitime[0]);
                             if (cas < 3 && cas >= 0) {
                                 JSONObject array1= weather.getJSONObject("main");
                                 String[] temp = { array1.getString("temp"), array1.getString("temp_min"), array1.getString("temp_max")};
@@ -210,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragmentA
                         String[] cdate = weather.getString("dt_txt").split(" ");
                         if(date1.equals(cdate[0])){
                             String[] apitime = cdate[1].split(":");
-                            int cas = Integer.parseInt(apitime[0]) - Integer.parseInt(time[0]);
+                            int cas = Integer.parseInt(time[0]) - Integer.parseInt(apitime[0]);
                             if (cas < 3 && cas >= 0) {
                                 JSONObject array1= weather.getJSONObject("main");
                                 String[] temp = { array1.getString("temp"), array1.getString("temp_min"), array1.getString("temp_max")};
